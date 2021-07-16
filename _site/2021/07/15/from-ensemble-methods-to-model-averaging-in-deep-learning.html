@@ -8,8 +8,8 @@
 <meta property="og:title" content="From Ensemble Methods to Model Averaging in Deep Learning" />
 <meta name="author" content="Hawren Fang" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results." />
-<meta property="og:description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results." />
+<meta name="description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning." />
+<meta property="og:description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning." />
 <link rel="canonical" href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
 <meta property="og:url" content="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
 <meta property="og:site_name" content="Hawren’s blog" />
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="From Ensemble Methods to Model Averaging in Deep Learning" />
 <script type="application/ld+json">
-{"datePublished":"2021-07-15T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-15T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results.","@context":"https://schema.org"}</script>
+{"datePublished":"2021-07-15T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-15T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Hawren's blog" />
 
@@ -59,10 +59,15 @@ ensemble methods create multiple models \(M_1,M_2,\dots,M_n\)
 and fuse the results from them to achieve the test accuracy
 better than any of \(M_1,M_2,\dots,M_n\).
 In a number of machine learning competitions,
-the winning solutions involved ensemble learning.
-For example, the <a href="https://www.wired.com/2009/09/bellkors-pragmatic-chaos-wins-1-million-netflix-prize/">Netflix prize winner</a>
+the winning solutions involved ensemble learning.</p>
+
+<p>For example, the <a href="https://en.wikipedia.org/wiki/Netflix_Prize">Netflix prize winner</a>
 is an ensemble of 3 solutions to deliver
-excellent collaborative filtering results.</p>
+excellent collaborative filtering results.
+Another example is <a href="https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html">Trimps-Soushen</a>,
+which fused 5 strong computer vision models to win
+the first place of object classification and object localization
+in the 2016 ImageNet Large Scale Visual Recognition Challenge (ILSVRC).</p>
 
 <p>In deep learning, neural networks can be relatively expensive,
 in both training and inference.
@@ -944,11 +949,19 @@ information.</p>
       title        = "From Ensemble Methods to Model Averaging in Deep Learning",
       author       = "Fang, Hawren",
       year         = 2021,
-      howpublished = "http://lilianweng.github.io/hawren-log/2021/7/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
+      howpublished = "http://hrfang.github.io/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
 }
 </code></pre></div></div>
 
 <h1 id="references">References</h1>
+
+<p>[1]
+<a href="https://en.wikipedia.org/wiki/Netflix_Prize">“Netflix prize,”</a>
+Wikipedia.</p>
+
+<p>[2] J. Shao, X. Zhang, Z. Ding, Y. Zhao, Y. Chen, J. Zhou, W. Wang, L. Mei, and C. Hu,
+<a href="https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html">“Good practices for deep feature fusion,”</a>
+ICCV workshop talk, 2016.</p>
 
 <p>[1] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich,
 <a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html">“Going deeper with convolutions,”</a>

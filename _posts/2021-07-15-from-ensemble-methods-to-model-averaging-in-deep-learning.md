@@ -13,11 +13,14 @@ and fuse the results from them to achieve the test accuracy
 better than any of \\(M_1,M_2,\dots,M_n\\).
 In a number of machine learning competitions,
 the winning solutions involved ensemble learning.
-For example, the [Netflix prize winner][netflix_prize_winner]
+
+For example, the [Netflix prize winner][netflix_prize_wiki]
 is an ensemble of 3 solutions to deliver
 excellent collaborative filtering results.
-
-[netflix_prize_winner]: https://www.wired.com/2009/09/bellkors-pragmatic-chaos-wins-1-million-netflix-prize/
+Another example is [Trimps-Soushen][trimps-soushen_slides],
+which fused 5 strong computer vision models to win
+the first place of object classification and object localization
+in the 2016 ImageNet Large Scale Visual Recognition Challenge (ILSVRC).
 
 In deep learning, neural networks can be relatively expensive,
 in both training and inference.
@@ -905,12 +908,24 @@ Cited as:
       title        = "From Ensemble Methods to Model Averaging in Deep Learning",
       author       = "Fang, Hawren",
       year         = 2021,
-      howpublished = "http://lilianweng.github.io/hawren-log/2021/7/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
+      howpublished = "http://hrfang.github.io/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
 }
 ```
 
 
 # References
+
+[1]
+["Netflix prize,"][netflix_prize_wiki]
+Wikipedia.
+
+[netflix_prize_wiki]: https://en.wikipedia.org/wiki/Netflix_Prize
+
+[2] J. Shao, X. Zhang, Z. Ding, Y. Zhao, Y. Chen, J. Zhou, W. Wang, L. Mei, and C. Hu,
+["Good practices for deep feature fusion,"][trimps-soushen_slides]
+ICCV workshop talk, 2016.
+
+[trimps-soushen_slides]: https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html
 
 [1] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich,
 ["Going deeper with convolutions,"][googlenet_paper]

@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-15T21:58:37-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-15T22:47:16-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
 ensemble methods create multiple models \(M_1,M_2,\dots,M_n\)
 and fuse the results from them to achieve the test accuracy
 better than any of \(M_1,M_2,\dots,M_n\).
 In a number of machine learning competitions,
-the winning solutions involved ensemble learning.
-For example, the &lt;a href=&quot;https://www.wired.com/2009/09/bellkors-pragmatic-chaos-wins-1-million-netflix-prize/&quot;&gt;Netflix prize winner&lt;/a&gt;
+the winning solutions involved ensemble learning.&lt;/p&gt;
+
+&lt;p&gt;For example, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Netflix_Prize&quot;&gt;Netflix prize winner&lt;/a&gt;
 is an ensemble of 3 solutions to deliver
-excellent collaborative filtering results.&lt;/p&gt;
+excellent collaborative filtering results.
+Another example is &lt;a href=&quot;https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html&quot;&gt;Trimps-Soushen&lt;/a&gt;,
+which fused 5 strong computer vision models to win
+the first place of object classification and object localization
+in the 2016 ImageNet Large Scale Visual Recognition Challenge (ILSVRC).&lt;/p&gt;
 
 &lt;p&gt;In deep learning, neural networks can be relatively expensive,
 in both training and inference.
@@ -888,11 +893,19 @@ information.&lt;/p&gt;
       title        = &quot;From Ensemble Methods to Model Averaging in Deep Learning&quot;,
       author       = &quot;Fang, Hawren&quot;,
       year         = 2021,
-      howpublished = &quot;http://lilianweng.github.io/hawren-log/2021/7/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html&quot;
+      howpublished = &quot;http://hrfang.github.io/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html&quot;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;p&gt;[1]
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Netflix_Prize&quot;&gt;“Netflix prize,”&lt;/a&gt;
+Wikipedia.&lt;/p&gt;
+
+&lt;p&gt;[2] J. Shao, X. Zhang, Z. Ding, Y. Zhao, Y. Chen, J. Zhou, W. Wang, L. Mei, and C. Hu,
+&lt;a href=&quot;https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html&quot;&gt;“Good practices for deep feature fusion,”&lt;/a&gt;
+ICCV workshop talk, 2016.&lt;/p&gt;
 
 &lt;p&gt;[1] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich,
 &lt;a href=&quot;https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html&quot;&gt;“Going deeper with convolutions,”&lt;/a&gt;
@@ -1004,4 +1017,4 @@ ICLR, 2020.&lt;/p&gt;
 
 &lt;p&gt;[28] L. Wright:
 &lt;a href=&quot;https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d&quot;&gt;“New deep learning optimizer, Ranger: synergistic combination of RAdam + LookAhead for the best of both,”&lt;/a&gt;
-Medium blog post, 2019.&lt;/p&gt;</content><author><name>Hawren Fang</name></author><category term="boosting" /><category term="snapshot-ensembles" /><category term="fast-geometric-ensembles" /><category term="stochastic-weight-averaging" /><category term="lookahead-optimizer" /><summary type="html">In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results.</summary></entry></feed>
+Medium blog post, 2019.&lt;/p&gt;</content><author><name>Hawren Fang</name></author><category term="boosting" /><category term="snapshot-ensembles" /><category term="fast-geometric-ensembles" /><category term="stochastic-weight-averaging" /><category term="lookahead-optimizer" /><summary type="html">In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning.</summary></entry></feed>
