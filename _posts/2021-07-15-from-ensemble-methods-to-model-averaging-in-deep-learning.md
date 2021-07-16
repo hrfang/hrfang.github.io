@@ -3,6 +3,7 @@ layout: post
 title: "From Ensemble Methods to Model Averaging in Deep Learning"
 date: "2021-7-15"
 author: "Hawren Fang"
+usemathjax: true
 tags: boosting snapshot-ensembles fast-geometric-ensembles stochastic-weight-averaging lookahead-optimizer
 ---
 
@@ -615,7 +616,7 @@ Now we can plot training loss and test error of
 \\(w_{\text{SWA}}(t,d)\\) and \\(w_{\text{SGD}}(t,d)\\) in terms of distance \\(t\\),
 as shown in the following pictures.
 
-![Loss sensitivity: SWA vs. SGD]({{ '/assets/images/images/swa_vs_sgd_1d_loss_landscape.png' | relative_url }})
+![Loss sensitivity: SWA vs. SGD]({{ '/assets/images/swa_vs_sgd_1d_loss_landscape.png' | relative_url }})
 
 Figure 10. Plots of test error (**left**) and
 \\(L_2\\)-regularized cross-entropy training loss (**right**),
@@ -818,7 +819,7 @@ where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
 but help the result less sensitive to the change of learning rate.
 
-![Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10]({{ '/assets/images/images/lookahead_vs_sgd_cifar10.png' | relative_url }})
+![Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10]({{ '/assets/images/lookahead_vs_sgd_cifar10.png' | relative_url }})
 
 Figure 13. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
 CIFAR-10 image classification. Source: [Zhang et al. (2019)][lookahead_paper]

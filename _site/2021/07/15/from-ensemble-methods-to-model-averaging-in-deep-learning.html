@@ -10,21 +10,24 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results." />
 <meta property="og:description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results." />
-<link rel="canonical" href="http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
-<meta property="og:url" content="http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
+<link rel="canonical" href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
+<meta property="og:url" content="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
 <meta property="og:site_name" content="Hawren’s blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-07-15T00:00:00-07:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="From Ensemble Methods to Model Averaging in Deep Learning" />
 <script type="application/ld+json">
-{"datePublished":"2021-07-15T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-15T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results.","@context":"https://schema.org"}</script>
+{"datePublished":"2021-07-15T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-15T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning. For example, the Netflix prize winner is an ensemble of 3 solutions to deliver excellent collaborative filtering results.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/docs/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/docs/feed.xml" title="Hawren's blog" /></head>
-<body>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><header class="site-header" role="banner">
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Hawren's blog" />
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/docs/">Hawren&#39;s blog</a><nav class="site-nav">
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Hawren&#39;s blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -34,7 +37,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/docs/about/">About</a></div>
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -43,9 +46,11 @@
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">From Ensemble Methods to Model Averaging in Deep Learning</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2021-07-15T00:00:00-07:00" itemprop="datePublished">Jul 15, 2021
-      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Hawren Fang</span></span></p>
+    <p class="post-meta"><time class="dt-published" datetime="2021-07-15T00:00:00-07:00" itemprop="datePublished">
+        Jul 15, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hawren Fang</span></span></p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
@@ -217,8 +222,7 @@ to the training error of the previous model, to increase the importance
 of those misclassified, and decrease the importance of those correctly classified.
 The flow is illustrated in the following picture.</p>
 
-<p><img src="images/1280px-Ensemble_Boosting.svg.png" alt="Boosting \label{fig:1}" />
-<img src="/docs/assets/images/1280px-Ensemble_Boosting.svg.png" alt="Boosting" /></p>
+<p><img src="/assets/images/1280px-Ensemble_Boosting.svg.png" alt="Boosting" /></p>
 
 <p>Figure 1. The flow of training an ensemble of models by boosting.
 Image source: <a href="https://en.wikipedia.org/wiki/Boosting_(machine_learning)">Wikipedia</a></p>
@@ -262,7 +266,7 @@ with convolutional neural networks, called BoostCNN, for multiclass classificati
 They reported the improved accuracy by BoostCNN on multiple datasets.
 The following picture shows the result on <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>.</p>
 
-<p><img src="images/mcboost_cnn_cfar10.png" alt="BoostCNN CIFAR-10 result" /></p>
+<p><img src="/assets/images/mcboost_cnn_cfar10.png" alt="BoostCNN CIFAR-10 result" /></p>
 
 <p>Figure 2. CIFAR-10 classification error rate with single CNN, Bagging (i.e. simple averaging), and BoostCNN.
 Image source: <a href="http://www.bmva.org/bmvc/2016/papers/paper024/index.html">Moghimi et al. (2016)</a></p>
@@ -319,7 +323,7 @@ the iterates are converging to and escaping from multiple local minima,
 <em>snapshotted</em> to form an ensemble for test-time inference.
 This idea is illustrated in the following picture on the right hand side.</p>
 
-<p><img src="images/snapshot_ensemble_illustration.png" alt="Snapshot ensemble \label{fig:3}" /></p>
+<p><img src="/assets/images/snapshot_ensemble_illustration.png" alt="Snapshot ensemble \label{fig:3}" /></p>
 
 <p>Figure 3.
 <strong>Left:</strong> Optimization with a typical (non-increasing) learning rate schedule.
@@ -374,7 +378,7 @@ for all \(t=0,\dots,n-1\) (\(n=6\) cycles).
 The result of a standard learning rate schedule is also shown
 in the picture for comparison.</p>
 
-<p><img src="images/cyclic_lr_loss.png" alt="Training loss vs. learning rate schedules" /></p>
+<p><img src="/assets/images/cyclic_lr_loss.png" alt="Training loss vs. learning rate schedules" /></p>
 
 <p>Figure 4. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -391,7 +395,7 @@ with various numbers of models in the ensemble, and
 two different start learning rates \(\alpha_0=0.1\) and \(\alpha_0=0.2\).
 The test accuracy improvement by snapshot ensembling is clear.</p>
 
-<p><img src="images/snapshot_ensembles_cifar_result.png" alt="CIFAR result of snapshot ensembles" /></p>
+<p><img src="/assets/images/snapshot_ensembles_cifar_result.png" alt="CIFAR result of snapshot ensembles" /></p>
 
 <p>Figure 5. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -409,7 +413,8 @@ such that along this path the training loss value is stably low,
 i.e. no substantial increase.
 It is illustrated in the following pictures.</p>
 
-<p><img src="images/mode_connectivity_illustration.png" alt="Illustration of mode connectivity." /></p>
+<p><img src="/assets/images/mode_connectivity_illustration.png" alt="Illustration of mode connectivity." />
+<img src="/assets/images/1280px-Ensemble_Boosting.svg.png" alt="Boosting" /></p>
 
 <p>Figure 6. \(L_2\)-regularized cross-entropy training loss surface of ResNet-164 on CIFAR-10.
 <strong>Left:</strong> Three optima of independently trained models.
@@ -463,7 +468,7 @@ At mini-batch iteration \(i=0,1,\dots\), the learning rate is:</p>
 with \(c\) the cycle length as an even number.
 The result of ResNet-164 on CIFAR-10 is as follows.</p>
 
-<p><img src="images/fge_result_resnet164_cifar10.png" alt="Result of ResNet-164 on CIFAR-10." /></p>
+<p><img src="/assets/images/fge_result_resnet164_cifar10.png" alt="Result of ResNet-164 on CIFAR-10." /></p>
 
 <p>Figure 7. Result of ResNet-164 on CIFAR-10.
 <strong>Left:</strong> Plots of learning rate (top), test error (middle), and
@@ -523,7 +528,7 @@ each node is <em>dropped</em> with probability \(p\), called dropout rate.
 It results in a <em>thinned</em> network.
 An example is illustrated in the following picture.</p>
 
-<p><img src="images/dropout_illustration.png" alt="Illustration of dropout" /></p>
+<p><img src="/assets/images/dropout_illustration.png" alt="Illustration of dropout" /></p>
 
 <p>Figure 8. Illustration of dropout.
 <strong>Left:</strong> A standard network.
@@ -560,7 +565,7 @@ That’s the price to pay for the generalization.</p>
 <p>The following picture gives an example of improved test accuracy by dropout
 in the classification experiments by <a href="https://jmlr.org/papers/v15/srivastava14a.html">Srivastava et al. (2014)</a>.</p>
 
-<p><img src="images/test_error_dropout.png" alt="Test error with and without dropout" /></p>
+<p><img src="/assets/images/test_error_dropout.png" alt="Test error with and without dropout" /></p>
 
 <p>Figure 9. Test error with various network architectures (2 to 4 hidden
 layers), with and without dropout.
@@ -654,7 +659,7 @@ and \(t\) is the distance from \(w_{\text{SWA}}\) or \(w_{\text{SGD}}\).</p>
 \(w_{\text{SWA}}(t,d)\) and \(w_{\text{SGD}}(t,d)\) in terms of distance \(t\),
 as shown in the following pictures.</p>
 
-<p><img src="images/swa_vs_sgd_1d_loss_landscape.png" alt="Loss sensitivity: SWA vs. SGD" /></p>
+<p><img src="/assets/images/swa_vs_sgd_1d_loss_landscape.png" alt="Loss sensitivity: SWA vs. SGD" /></p>
 
 <p>Figure 10. Plots of test error (<strong>left</strong>) and
 \(L_2\)-regularized cross-entropy training loss (<strong>right</strong>),
@@ -725,7 +730,7 @@ earlier, and then starting from the averaged iterate for the next mini-batch
 iterations.
 An illustration with \(k=5\) is given in the following picture.</p>
 
-<p><img src="images/lookahead_optimizer_illustration.png" alt="Illustration of Lookahead Optimization" /></p>
+<p><img src="/assets/images/lookahead_optimizer_illustration.png" alt="Illustration of Lookahead Optimization" /></p>
 
 <p>Figure 11. Illustration of Lookahead Optimization.
 Image source: <a href="https://michaelrzhang.github.io/assets/lookahead_slides.pdf">Zhang’s talk</a></p>
@@ -827,7 +832,7 @@ with synchronization period \(k=5,10\) and step length \(\alpha=0.5,0.8\)
 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>.
 Note that \(k\) and \(\alpha\) are the only two hyper-parameters of Lookahead.</p>
 
-<p><img src="images/lookahead_hyperparameters_cifar100.png" alt="Effects of hyper-parameters of Lookahead, on CIFAR-100" /></p>
+<p><img src="/assets/images/lookahead_hyperparameters_cifar100.png" alt="Effects of hyper-parameters of Lookahead, on CIFAR-100" /></p>
 
 <p>Figure 12. Effects of hyper-parameters of Lookahead, in the experiments on CIFAR-100.
 <strong>Left:</strong> training loss vs. number of epochs.
@@ -853,7 +858,7 @@ where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
 but help the result less sensitive to the change of learning rate.</p>
 
-<p><img src="images/lookahead_vs_sgd_cifar10.png" alt="Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10" /></p>
+<p><img src="/assets/images/lookahead_vs_sgd_cifar10.png" alt="Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10" /></p>
 
 <p>Figure 13. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
 CIFAR-10 image classification. Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
@@ -868,7 +873,7 @@ accuracy vs. mini-batch iterations on epoch 65,
 where fast weights are marked in blue solid lines (inner iterations)
 and slow weights are marked in the green dashed line (outer iterations).</p>
 
-<p><img src="images/slow_vs_fast_weights_test_error.png" alt="Test accuracy, slow weights vs. fast weights of Lookahead" /></p>
+<p><img src="/assets/images/slow_vs_fast_weights_test_error.png" alt="Test accuracy, slow weights vs. fast weights of Lookahead" /></p>
 
 <p>Figure 14. Test accuracy, slow weights vs. fast weights of Lookahead.
 Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
@@ -1058,12 +1063,12 @@ ICLR, 2020.</p>
 Medium blog post, 2019.</p>
 
 
-  </div><a class="u-url" href="/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" hidden></a>
+  </div><a class="u-url" href="/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" hidden></a>
 </article>
 
       </div>
     </main><footer class="site-footer h-card">
-  <data class="u-url" href="/docs/"></data>
+  <data class="u-url" href="/"></data>
 
   <div class="wrapper">
 
@@ -1075,7 +1080,7 @@ Medium blog post, 2019.</p>
           <li class="p-name">Hawren&#39;s blog</li><li><a class="u-email" href="mailto:hrfang at yahoo dot com">hrfang at yahoo dot com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/hrfang"><svg class="svg-icon"><use xlink:href="/docs/assets/minima-social-icons.svg#github"></use></svg> <span class="username">hrfang</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
 </div>
 
       <div class="footer-col footer-col-3">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/docs/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/docs/" rel="alternate" type="text/html" /><updated>2021-07-15T18:05:50-07:00</updated><id>http://localhost:4000/docs/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/docs/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-15T21:58:37-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
 ensemble methods create multiple models \(M_1,M_2,\dots,M_n\)
 and fuse the results from them to achieve the test accuracy
 better than any of \(M_1,M_2,\dots,M_n\).
@@ -166,8 +166,7 @@ to the training error of the previous model, to increase the importance
 of those misclassified, and decrease the importance of those correctly classified.
 The flow is illustrated in the following picture.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/1280px-Ensemble_Boosting.svg.png&quot; alt=&quot;Boosting \label{fig:1}&quot; /&gt;
-&lt;img src=&quot;/docs/assets/images/1280px-Ensemble_Boosting.svg.png&quot; alt=&quot;Boosting&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/1280px-Ensemble_Boosting.svg.png&quot; alt=&quot;Boosting&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 1. The flow of training an ensemble of models by boosting.
 Image source: &lt;a href=&quot;https://en.wikipedia.org/wiki/Boosting_(machine_learning)&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
@@ -211,7 +210,7 @@ with convolutional neural networks, called BoostCNN, for multiclass classificati
 They reported the improved accuracy by BoostCNN on multiple datasets.
 The following picture shows the result on &lt;a href=&quot;https://www.cs.toronto.edu/~kriz/cifar.html&quot;&gt;CIFAR-10&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/mcboost_cnn_cfar10.png&quot; alt=&quot;BoostCNN CIFAR-10 result&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcboost_cnn_cfar10.png&quot; alt=&quot;BoostCNN CIFAR-10 result&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 2. CIFAR-10 classification error rate with single CNN, Bagging (i.e. simple averaging), and BoostCNN.
 Image source: &lt;a href=&quot;http://www.bmva.org/bmvc/2016/papers/paper024/index.html&quot;&gt;Moghimi et al. (2016)&lt;/a&gt;&lt;/p&gt;
@@ -268,7 +267,7 @@ the iterates are converging to and escaping from multiple local minima,
 &lt;em&gt;snapshotted&lt;/em&gt; to form an ensemble for test-time inference.
 This idea is illustrated in the following picture on the right hand side.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/snapshot_ensemble_illustration.png&quot; alt=&quot;Snapshot ensemble \label{fig:3}&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/snapshot_ensemble_illustration.png&quot; alt=&quot;Snapshot ensemble \label{fig:3}&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 3.
 &lt;strong&gt;Left:&lt;/strong&gt; Optimization with a typical (non-increasing) learning rate schedule.
@@ -323,7 +322,7 @@ for all \(t=0,\dots,n-1\) (\(n=6\) cycles).
 The result of a standard learning rate schedule is also shown
 in the picture for comparison.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/cyclic_lr_loss.png&quot; alt=&quot;Training loss vs. learning rate schedules&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cyclic_lr_loss.png&quot; alt=&quot;Training loss vs. learning rate schedules&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 4. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -340,7 +339,7 @@ with various numbers of models in the ensemble, and
 two different start learning rates \(\alpha_0=0.1\) and \(\alpha_0=0.2\).
 The test accuracy improvement by snapshot ensembling is clear.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/snapshot_ensembles_cifar_result.png&quot; alt=&quot;CIFAR result of snapshot ensembles&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/snapshot_ensembles_cifar_result.png&quot; alt=&quot;CIFAR result of snapshot ensembles&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 5. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -358,7 +357,8 @@ such that along this path the training loss value is stably low,
 i.e. no substantial increase.
 It is illustrated in the following pictures.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/mode_connectivity_illustration.png&quot; alt=&quot;Illustration of mode connectivity.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/mode_connectivity_illustration.png&quot; alt=&quot;Illustration of mode connectivity.&quot; /&gt;
+&lt;img src=&quot;/assets/images/1280px-Ensemble_Boosting.svg.png&quot; alt=&quot;Boosting&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 6. \(L_2\)-regularized cross-entropy training loss surface of ResNet-164 on CIFAR-10.
 &lt;strong&gt;Left:&lt;/strong&gt; Three optima of independently trained models.
@@ -412,7 +412,7 @@ At mini-batch iteration \(i=0,1,\dots\), the learning rate is:&lt;/p&gt;
 with \(c\) the cycle length as an even number.
 The result of ResNet-164 on CIFAR-10 is as follows.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/fge_result_resnet164_cifar10.png&quot; alt=&quot;Result of ResNet-164 on CIFAR-10.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/fge_result_resnet164_cifar10.png&quot; alt=&quot;Result of ResNet-164 on CIFAR-10.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 7. Result of ResNet-164 on CIFAR-10.
 &lt;strong&gt;Left:&lt;/strong&gt; Plots of learning rate (top), test error (middle), and
@@ -472,7 +472,7 @@ each node is &lt;em&gt;dropped&lt;/em&gt; with probability \(p\), called dropout
 It results in a &lt;em&gt;thinned&lt;/em&gt; network.
 An example is illustrated in the following picture.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/dropout_illustration.png&quot; alt=&quot;Illustration of dropout&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/dropout_illustration.png&quot; alt=&quot;Illustration of dropout&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 8. Illustration of dropout.
 &lt;strong&gt;Left:&lt;/strong&gt; A standard network.
@@ -509,7 +509,7 @@ That’s the price to pay for the generalization.&lt;/p&gt;
 &lt;p&gt;The following picture gives an example of improved test accuracy by dropout
 in the classification experiments by &lt;a href=&quot;https://jmlr.org/papers/v15/srivastava14a.html&quot;&gt;Srivastava et al. (2014)&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/test_error_dropout.png&quot; alt=&quot;Test error with and without dropout&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/test_error_dropout.png&quot; alt=&quot;Test error with and without dropout&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 9. Test error with various network architectures (2 to 4 hidden
 layers), with and without dropout.
@@ -603,7 +603,7 @@ and \(t\) is the distance from \(w_{\text{SWA}}\) or \(w_{\text{SGD}}\).&lt;/p&g
 \(w_{\text{SWA}}(t,d)\) and \(w_{\text{SGD}}(t,d)\) in terms of distance \(t\),
 as shown in the following pictures.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/swa_vs_sgd_1d_loss_landscape.png&quot; alt=&quot;Loss sensitivity: SWA vs. SGD&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/swa_vs_sgd_1d_loss_landscape.png&quot; alt=&quot;Loss sensitivity: SWA vs. SGD&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 10. Plots of test error (&lt;strong&gt;left&lt;/strong&gt;) and
 \(L_2\)-regularized cross-entropy training loss (&lt;strong&gt;right&lt;/strong&gt;),
@@ -674,7 +674,7 @@ earlier, and then starting from the averaged iterate for the next mini-batch
 iterations.
 An illustration with \(k=5\) is given in the following picture.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/lookahead_optimizer_illustration.png&quot; alt=&quot;Illustration of Lookahead Optimization&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/lookahead_optimizer_illustration.png&quot; alt=&quot;Illustration of Lookahead Optimization&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 11. Illustration of Lookahead Optimization.
 Image source: &lt;a href=&quot;https://michaelrzhang.github.io/assets/lookahead_slides.pdf&quot;&gt;Zhang’s talk&lt;/a&gt;&lt;/p&gt;
@@ -776,7 +776,7 @@ with synchronization period \(k=5,10\) and step length \(\alpha=0.5,0.8\)
 &lt;a href=&quot;https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html&quot;&gt;(Zhang et al., 2019)&lt;/a&gt;.
 Note that \(k\) and \(\alpha\) are the only two hyper-parameters of Lookahead.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/lookahead_hyperparameters_cifar100.png&quot; alt=&quot;Effects of hyper-parameters of Lookahead, on CIFAR-100&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/lookahead_hyperparameters_cifar100.png&quot; alt=&quot;Effects of hyper-parameters of Lookahead, on CIFAR-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 12. Effects of hyper-parameters of Lookahead, in the experiments on CIFAR-100.
 &lt;strong&gt;Left:&lt;/strong&gt; training loss vs. number of epochs.
@@ -802,7 +802,7 @@ where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
 but help the result less sensitive to the change of learning rate.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/lookahead_vs_sgd_cifar10.png&quot; alt=&quot;Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/lookahead_vs_sgd_cifar10.png&quot; alt=&quot;Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 13. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
 CIFAR-10 image classification. Source: &lt;a href=&quot;https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html&quot;&gt;Zhang et al. (2019)&lt;/a&gt;&lt;/p&gt;
@@ -817,7 +817,7 @@ accuracy vs. mini-batch iterations on epoch 65,
 where fast weights are marked in blue solid lines (inner iterations)
 and slow weights are marked in the green dashed line (outer iterations).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/slow_vs_fast_weights_test_error.png&quot; alt=&quot;Test accuracy, slow weights vs. fast weights of Lookahead&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/slow_vs_fast_weights_test_error.png&quot; alt=&quot;Test accuracy, slow weights vs. fast weights of Lookahead&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 14. Test accuracy, slow weights vs. fast weights of Lookahead.
 Source: &lt;a href=&quot;https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html&quot;&gt;Zhang et al. (2019)&lt;/a&gt;&lt;/p&gt;
