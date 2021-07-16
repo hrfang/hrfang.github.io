@@ -171,7 +171,6 @@ to the training error of the previous model, to increase the importance
 of those misclassified, and decrease the importance of those correctly classified.
 The flow is illustrated in the following picture.
 
-![Boosting \label{fig:1}](images/1280px-Ensemble_Boosting.svg.png)
 ![Boosting]({{ '/assets/images/1280px-Ensemble_Boosting.svg.png' | relative_url }})
 
 Figure 1. The flow of training an ensemble of models by boosting.
@@ -218,7 +217,7 @@ The following picture shows the result on [CIFAR-10][cifar_datasets].
 
 [cifar_datasets]: https://www.cs.toronto.edu/~kriz/cifar.html
 
-![BoostCNN CIFAR-10 result](images/mcboost_cnn_cfar10.png)
+![BoostCNN CIFAR-10 result]({{ '/assets/images/mcboost_cnn_cfar10.png' | relative_url }} )
 
 Figure 2. CIFAR-10 classification error rate with single CNN, Bagging (i.e. simple averaging), and BoostCNN.
 Image source: [Moghimi et al. (2016)][boost_cnn_paper]
@@ -274,7 +273,7 @@ the iterates are converging to and escaping from multiple local minima,
 *snapshotted* to form an ensemble for test-time inference.
 This idea is illustrated in the following picture on the right hand side.
 
-![Snapshot ensemble \label{fig:3}](images/snapshot_ensemble_illustration.png)
+![Snapshot ensemble \label{fig:3}]({{ '/assets/images/snapshot_ensemble_illustration.png' | relative_url }})
 
 Figure 3.
 **Left:** Optimization with a typical (non-increasing) learning rate schedule.
@@ -330,7 +329,7 @@ for all \\(t=0,\dots,n-1\\) (\\(n=6\\) cycles).
 The result of a standard learning rate schedule is also shown
 in the picture for comparison.
 
-![Training loss vs. learning rate schedules](images/cyclic_lr_loss.png)
+![Training loss vs. learning rate schedules]({{ '/assets/images/cyclic_lr_loss.png' | relative_url }})
 
 Figure 4. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -348,7 +347,7 @@ with various numbers of models in the ensemble, and
 two different start learning rates \\(\alpha_0=0.1\\) and \\(\alpha_0=0.2\\).
 The test accuracy improvement by snapshot ensembling is clear.
 
-![CIFAR result of snapshot ensembles](images/snapshot_ensembles_cifar_result.png)
+![CIFAR result of snapshot ensembles]({{ '/assets/images/snapshot_ensembles_cifar_result.png' | relative_url }})
 
 Figure 5. CIFAR-10 training loss of 100-layer DenseNet,
 with a standard learning rate schedule (blue)
@@ -367,7 +366,8 @@ such that along this path the training loss value is stably low,
 i.e. no substantial increase.
 It is illustrated in the following pictures.
 
-![Illustration of mode connectivity.](images/mode_connectivity_illustration.png)
+![Illustration of mode connectivity.]({{ '/assets/images/mode_connectivity_illustration.png' | relative_url }})
+![Boosting]({{ '/assets/images/1280px-Ensemble_Boosting.svg.png' | relative_url }})
 
 Figure 6. \\(L_2\\)-regularized cross-entropy training loss surface of ResNet-164 on CIFAR-10.
 **Left:** Three optima of independently trained models.
@@ -423,7 +423,7 @@ where \\(t(i)=\frac{1}{c}(\text{mod}(i,c)+1)\\),
 with \\(c\\) the cycle length as an even number.
 The result of ResNet-164 on CIFAR-10 is as follows.
 
-![Result of ResNet-164 on CIFAR-10.](images/fge_result_resnet164_cifar10.png)
+![Result of ResNet-164 on CIFAR-10.]({{ '/assets/images/fge_result_resnet164_cifar10.png' | relative_url }})
 
 Figure 7. Result of ResNet-164 on CIFAR-10.
 **Left:** Plots of learning rate (top), test error (middle), and
@@ -483,7 +483,7 @@ each node is *dropped* with probability \\(p\\), called dropout rate.
 It results in a *thinned* network.
 An example is illustrated in the following picture.
 
-![Illustration of dropout](images/dropout_illustration.png)
+![Illustration of dropout]({{ '/assets/images/dropout_illustration.png' | relative_url }})
 
 Figure 8. Illustration of dropout.
 **Left:** A standard network.
@@ -521,7 +521,7 @@ That's the price to pay for the generalization.
 The following picture gives an example of improved test accuracy by dropout
 in the classification experiments by [Srivastava et al. (2014)][dropout_paper].
 
-![Test error with and without dropout](images/test_error_dropout.png)
+![Test error with and without dropout]({{ '/assets/images/test_error_dropout.png' | relative_url }})
 
 Figure 9. Test error with various network architectures (2 to 4 hidden
 layers), with and without dropout.
@@ -615,7 +615,7 @@ Now we can plot training loss and test error of
 \\(w_{\text{SWA}}(t,d)\\) and \\(w_{\text{SGD}}(t,d)\\) in terms of distance \\(t\\),
 as shown in the following pictures.
 
-![Loss sensitivity: SWA vs. SGD](images/swa_vs_sgd_1d_loss_landscape.png)
+![Loss sensitivity: SWA vs. SGD]({{ '/assets/images/images/swa_vs_sgd_1d_loss_landscape.png' | relative_url }})
 
 Figure 10. Plots of test error (**left**) and
 \\(L_2\\)-regularized cross-entropy training loss (**right**),
@@ -688,7 +688,7 @@ earlier, and then starting from the averaged iterate for the next mini-batch
 iterations.
 An illustration with \\(k=5\\) is given in the following picture.
 
-![Illustration of Lookahead Optimization](images/lookahead_optimizer_illustration.png)
+![Illustration of Lookahead Optimization]({{ '/assets/images/lookahead_optimizer_illustration.png' | relative_url }})
 
 Figure 11. Illustration of Lookahead Optimization.
 Image source: [Zhang's talk][lookahead_slides]
@@ -793,7 +793,7 @@ with synchronization period \\(k=5,10\\) and step length \\(\alpha=0.5,0.8\\)
 [(Zhang et al., 2019)][lookahead_paper].
 Note that \\(k\\) and \\(\alpha\\) are the only two hyper-parameters of Lookahead.
 
-![Effects of hyper-parameters of Lookahead, on CIFAR-100](images/lookahead_hyperparameters_cifar100.png)
+![Effects of hyper-parameters of Lookahead, on CIFAR-100]({{ '/assets/images/lookahead_hyperparameters_cifar100.png' | relative_url }})
 
 Figure 12. Effects of hyper-parameters of Lookahead, in the experiments on CIFAR-100.
 **Left:** training loss vs. number of epochs.
@@ -818,7 +818,7 @@ where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
 but help the result less sensitive to the change of learning rate.
 
-![Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10](images/lookahead_vs_sgd_cifar10.png)
+![Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10]({{ '/assets/images/images/lookahead_vs_sgd_cifar10.png' | relative_url }})
 
 Figure 13. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
 CIFAR-10 image classification. Source: [Zhang et al. (2019)][lookahead_paper]
@@ -833,7 +833,7 @@ accuracy vs. mini-batch iterations on epoch 65,
 where fast weights are marked in blue solid lines (inner iterations)
 and slow weights are marked in the green dashed line (outer iterations).
 
-![Test accuracy, slow weights vs. fast weights of Lookahead](images/slow_vs_fast_weights_test_error.png)
+![Test accuracy, slow weights vs. fast weights of Lookahead]({{ '/assets/images/slow_vs_fast_weights_test_error.png' | relative_url }})
 
 Figure 14. Test accuracy, slow weights vs. fast weights of Lookahead.
 Source: [Zhang et al. (2019)][lookahead_paper]
