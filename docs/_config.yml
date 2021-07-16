@@ -34,7 +34,7 @@ url: "http://hrfang.github.io" # the base hostname & protocol for your site, e.g
 github_username:  hrfang
 
 # Build settings
-theme: minima
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
