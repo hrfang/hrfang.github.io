@@ -4,6 +4,7 @@ title: "From Ensemble Methods to Model Averaging in Deep Learning"
 date: "2021-7-15"
 author: "Hawren Fang"
 usemathjax: true
+comments: true
 tags: boosting snapshot-ensembles fast-geometric-ensembles stochastic-weight-averaging lookahead-optimizer
 ---
 

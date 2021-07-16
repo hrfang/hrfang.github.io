@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-15T22:47:16-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-15T23:25:36-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hawren’s blog</title><subtitle>2021 © by Hawren Fang. All Rights Reserved.</subtitle><entry><title type="html">From Ensemble Methods to Model Averaging in Deep Learning</title><link href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" rel="alternate" type="text/html" title="From Ensemble Methods to Model Averaging in Deep Learning" /><published>2021-07-15T00:00:00-07:00</published><updated>2021-07-15T00:00:00-07:00</updated><id>http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning</id><content type="html" xml:base="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html">&lt;p&gt;In machine learning,
 ensemble methods create multiple models \(M_1,M_2,\dots,M_n\)
 and fuse the results from them to achieve the test accuracy
 better than any of \(M_1,M_2,\dots,M_n\).
@@ -362,8 +362,7 @@ such that along this path the training loss value is stably low,
 i.e. no substantial increase.
 It is illustrated in the following pictures.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/mode_connectivity_illustration.png&quot; alt=&quot;Illustration of mode connectivity.&quot; /&gt;
-&lt;img src=&quot;/assets/images/1280px-Ensemble_Boosting.svg.png&quot; alt=&quot;Boosting&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/mode_connectivity_illustration.png&quot; alt=&quot;Illustration of mode connectivity.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 6. \(L_2\)-regularized cross-entropy training loss surface of ResNet-164 on CIFAR-10.
 &lt;strong&gt;Left:&lt;/strong&gt; Three optima of independently trained models.
@@ -876,9 +875,9 @@ the already successful Adam &lt;a href=&quot;https://arxiv.org/abs/1412.6980&quo
 
 &lt;p&gt;In short, RAdam improves the training stability
 by using un-adapted momentum (i.e. with momentum but without adaptive learning rate)
-at early iterations, where the exponential moving average (EMA) of each squared
+at early iterations, during which the exponential moving average (EMA) of each squared
 gradient component is not that reliable due to insufficient gradient samples.
-It also rectifies the adaptive learning to improve the reliability.&lt;/p&gt;
+After that, it also rectifies the adaptive learning rate to improve the reliability.&lt;/p&gt;
 
 &lt;p&gt;The combination of Lookahead and RAdam, called &lt;em&gt;Ranger&lt;/em&gt; optimizer
 &lt;a href=&quot;https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d&quot;&gt;(Wright, 2019)&lt;/a&gt;, is synergistic,
@@ -907,114 +906,114 @@ Wikipedia.&lt;/p&gt;
 &lt;a href=&quot;https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html&quot;&gt;“Good practices for deep feature fusion,”&lt;/a&gt;
 ICCV workshop talk, 2016.&lt;/p&gt;
 
-&lt;p&gt;[1] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich,
+&lt;p&gt;[3] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich,
 &lt;a href=&quot;https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html&quot;&gt;“Going deeper with convolutions,”&lt;/a&gt;
 CVPR, 2015.&lt;/p&gt;
 
-&lt;p&gt;[2] L. Breiman,
+&lt;p&gt;[4] L. Breiman,
 &lt;a href=&quot;https://link.springer.com/article/10.1023/A:1010933404324&quot;&gt;“Random forests,”&lt;/a&gt;
 Machine Learning, Vol. 45, pp. 5-32, 2001.&lt;/p&gt;
 
-&lt;p&gt;[3] Y. Freund and R. E. Schapire
+&lt;p&gt;[5] Y. Freund and R. E. Schapire
 &lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S002200009791504X&quot;&gt;“A decision-theoretic generalization of on-line learning and an application to boosting,”&lt;/a&gt;
 Journal of Computer and System Sciences, Vol. 55, pp. 119-139, 1997.&lt;/p&gt;
 
-&lt;p&gt;[4] J. Zhu, H. Zou, S. Rosset, and T. Hastie,
+&lt;p&gt;[6] J. Zhu, H. Zou, S. Rosset, and T. Hastie,
 &lt;a href=&quot;https://www.intlpress.com/site/pub/pages/journals/items/sii/content/vols/0002/0003/a008/&quot;&gt;“Multi-class AdaBoost”&lt;/a&gt;
 Statistics and Its Interface, Vol. 2, pp 349-360, 2009.&lt;/p&gt;
 
-&lt;p&gt;[5]
+&lt;p&gt;[7]
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Boosting_(machine_learning)&quot;&gt;“Boosting (machine learning),”&lt;/a&gt;
 Wikipedia.&lt;/p&gt;
 
-&lt;p&gt;[6] H. Schwenk and Y. Bengio,
+&lt;p&gt;[8] H. Schwenk and Y. Bengio,
 &lt;a href=&quot;https://papers.nips.cc/paper/1997/hash/9cb67ffb59554ab1dabb65bcb370ddd9-Abstract.html&quot;&gt;“Training methods for adaptive boosting of neural networks,”&lt;/a&gt;
 NeurIPS 1997.&lt;/p&gt;
 
-&lt;p&gt;[7] M. Moghimi, M. Saberian, J. Yang, L.-J. Li, N. Vasconcelos, and S. Belongie,
+&lt;p&gt;[9] M. Moghimi, M. Saberian, J. Yang, L.-J. Li, N. Vasconcelos, and S. Belongie,
 &lt;a href=&quot;http://www.bmva.org/bmvc/2016/papers/paper024/index.html&quot;&gt;“Boosted convolutional neural networks,&lt;/a&gt;
 BMVC, 2016.&lt;/p&gt;
 
-&lt;p&gt;[8] M. J. Saberian and N. Vasconcelos,
+&lt;p&gt;[10] M. J. Saberian and N. Vasconcelos,
 &lt;a href=&quot;https://papers.nips.cc/paper/2011/hash/2ac2406e835bd49c70469acae337d292-Abstract.html&quot;&gt;“Multiclass boosting: theory and algorithms,”&lt;/a&gt;
 NeurIPS, 2011.&lt;/p&gt;
 
-&lt;p&gt;[9] G. Huang, Y. Li, G. Pleiss, Z. Liu, J. E. Hopcroft, and K. Q. Weinberger
+&lt;p&gt;[11] G. Huang, Y. Li, G. Pleiss, Z. Liu, J. E. Hopcroft, and K. Q. Weinberger
 &lt;a href=&quot;https://openreview.net/forum?id=BJYwwY9ll&quot;&gt;“Snapshot ensembles: train 1, get \(M\) for free,”&lt;/a&gt;
 ICLR 2017.&lt;/p&gt;
 
-&lt;p&gt;[10] I. Loshchilov and F. Hutter,
+&lt;p&gt;[12] I. Loshchilov and F. Hutter,
 &lt;a href=&quot;https://arxiv.org/abs/1608.03983&quot;&gt;“SGDR: stochastic gradient descent with restarts,”&lt;/a&gt;
 ICLR, 2017.&lt;/p&gt;
 
-&lt;p&gt;[11] G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger,
+&lt;p&gt;[13] G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger,
 &lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2017/html/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.html&quot;&gt;“Densely connected convolutional networks,”&lt;/a&gt;
 CVPR, pp. 4700-4708, 2017.&lt;/p&gt;
 
-&lt;p&gt;[12] T. Garipov, P. Izmailov, D. Podoprikhin, D. P. Vetrov, and A. G. Wilson,
+&lt;p&gt;[14] T. Garipov, P. Izmailov, D. Podoprikhin, D. P. Vetrov, and A. G. Wilson,
 &lt;a href=&quot;https://proceedings.neurips.cc/paper/2018/hash/be3087e74e9100d4bc4c6268cdbe8456-Abstract.html&quot;&gt;“Loss surfaces, mode connectivity, and fast ensembling of DNNs,”&lt;/a&gt;
 NeurIPS, 2018.&lt;/p&gt;
 
-&lt;p&gt;[13] N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov,
+&lt;p&gt;[15] N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov,
 &lt;a href=&quot;https://jmlr.org/papers/v15/srivastava14a.html&quot;&gt;“Dropout: A Simple Way to Prevent Neural Networks from Overfitting,”&lt;/a&gt;
 Journal of Machine Learning Research, Vol. 15, No. 56, pp. 1929-1958, 2014.&lt;/p&gt;
 
-&lt;p&gt;[14] X. Glorot and Y. Bengio,
+&lt;p&gt;[16] X. Glorot and Y. Bengio,
 &lt;a href=&quot;http://proceedings.mlr.press/v9/glorot10a.html&quot;&gt;“Understanding the difficulty of training deep feedforward neural networks,”&lt;/a&gt;
 AISTATS, Vol. 9, pp. 249-256, 2010.&lt;/p&gt;
 
-&lt;p&gt;[15] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
+&lt;p&gt;[17] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
 &lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2015/html/Tompson_Efficient_Object_Localization_2015_CVPR_paper.html&quot;&gt;“Efficient object localization using convolutional networks,”&lt;/a&gt;
 CVPR, pp. 648-656, 2015.&lt;/p&gt;
 
-&lt;p&gt;[16] G. Ghiasi, T.-Y. Lin, Q. V. Le
+&lt;p&gt;[18] G. Ghiasi, T.-Y. Lin, Q. V. Le
 &lt;a href=&quot;https://papers.nips.cc/paper/2018/hash/7edcfb2d8f6a659ef4cd1e6c9b6d7079-Abstract.html&quot;&gt;“DropBlock: A regularization method for convolutional networks,”&lt;/a&gt;
 NeurIPS, 2018.&lt;/p&gt;
 
-&lt;p&gt;[17] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
+&lt;p&gt;[19] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
 &lt;a href=&quot;http://proceedings.mlr.press/v28/wan13.html&quot;&gt;“Regularization of neural networks using DropConnect,”&lt;/a&gt;
 ICML, Vol. 28, No. 3, pp. 1058-1066, 2013.&lt;/p&gt;
 
-&lt;p&gt;[18] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
+&lt;p&gt;[20] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
 &lt;a href=&quot;https://link.springer.com/chapter/10.1007/978-3-319-46493-0_39&quot;&gt;“Deep networks with stochastic depth,”&lt;/a&gt;
 ECCV, pp. 646-661, 2016.&lt;/p&gt;
 
-&lt;p&gt;[19] S. Singh, D. Hoiem, and D. Forsyth,
+&lt;p&gt;[21] S. Singh, D. Hoiem, and D. Forsyth,
 &lt;a href=&quot;https://proceedings.neurips.cc/paper/2016/hash/c51ce410c124a10e0db5e4b97fc2af39-Abstract.html&quot;&gt;Swapout: Learning an ensemble of deep architectures,”&lt;/a&gt;
 NeurIPS, 2016.&lt;/p&gt;
 
-&lt;p&gt;[20] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
+&lt;p&gt;[22] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
 &lt;a href=&quot;http://auai.org/uai2018/proceedings/papers/313.pdf&quot;&gt;“Averaging weights leads to wider optima and better generalization,”&lt;/a&gt;
 UAI, 2018.&lt;/p&gt;
 
-&lt;p&gt;[21] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
+&lt;p&gt;[23] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
 &lt;a href=&quot;https://papers.nips.cc/paper/2018/hash/a41b3bb3e6b050b6c9067c67f663b915-Abstract.html&quot;&gt;“Visualizing the loss landscape of neural nets,”&lt;/a&gt;
 NeurIPS, 2018.&lt;/p&gt;
 
-&lt;p&gt;[22] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
+&lt;p&gt;[24] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
 &lt;a href=&quot;https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html&quot;&gt;“Lookahead Optimizer: \(k\) steps forward, 1 step back,”&lt;/a&gt;
 NeurIPS, 2019.&lt;/p&gt;
 
-&lt;p&gt;[23] J. Martens,
+&lt;p&gt;[25] J. Martens,
 &lt;a href=&quot;https://jmlr.org/papers/v21/17-678.html&quot;&gt;“New Insights and Perspectives on the Natural Gradient Method,”&lt;/a&gt;
 Journal of Machine Learning Research, Vol. 21, No. 146, pp. 1-76, 2020.&lt;/p&gt;
 
-&lt;p&gt;[24] D. P. Kingma and J. Ba,
+&lt;p&gt;[26] D. P. Kingma and J. Ba,
 &lt;a href=&quot;https://arxiv.org/abs/1412.6980&quot;&gt;“Adam: A Method for Stochastic Optimization,”&lt;/a&gt;
 ICLR, 2015.&lt;/p&gt;
 
-&lt;p&gt;[25] D. G. Anderson,
+&lt;p&gt;[27] D. G. Anderson,
 &lt;a href=&quot;https://dl.acm.org/doi/abs/10.1145/321296.321305&quot;&gt;“Iterative procedures for nonlinear integral equations,”&lt;/a&gt;
 Journal of the ACM, Vol. 12, No. 4, pp. 547-560, 1965.&lt;/p&gt;
 
-&lt;p&gt;[26] H.-r. Fang and Y. Saad,
+&lt;p&gt;[28] H.-r. Fang and Y. Saad,
 &lt;a href=&quot;https://onlinelibrary.wiley.com/doi/abs/10.1002/nla.617&quot;&gt;“Two classes of multisecant methods for nonlinear acceleration,”&lt;/a&gt;
 Numerical Linear Algebra and Its Applications, Vol. 16, No. 3, pp. 197-221, 2009.&lt;/p&gt;
 
-&lt;p&gt;[27] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
+&lt;p&gt;[29] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
 &lt;a href=&quot;https://openreview.net/forum?id=rkgz2aEKDr&quot;&gt;“On the variance of the adaptive learning rate and beyond,”&lt;/a&gt;
 ICLR, 2020.&lt;/p&gt;
 
-&lt;p&gt;[28] L. Wright:
+&lt;p&gt;[30] L. Wright:
 &lt;a href=&quot;https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d&quot;&gt;“New deep learning optimizer, Ranger: synergistic combination of RAdam + LookAhead for the best of both,”&lt;/a&gt;
 Medium blog post, 2019.&lt;/p&gt;</content><author><name>Hawren Fang</name></author><category term="boosting" /><category term="snapshot-ensembles" /><category term="fast-geometric-ensembles" /><category term="stochastic-weight-averaging" /><category term="lookahead-optimizer" /><summary type="html">In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning.</summary></entry></feed>
