@@ -10,15 +10,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning." />
 <meta property="og:description" content="In machine learning, ensemble methods create multiple models \(M_1,M_2,\dots,M_n\) and fuse the results from them to achieve the test accuracy better than any of \(M_1,M_2,\dots,M_n\). In a number of machine learning competitions, the winning solutions involved ensemble learning." />
-<link rel="canonical" href="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
-<meta property="og:url" content="http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
+<link rel="canonical" href="http://localhost:4000/2021/07/16/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
+<meta property="og:url" content="http://localhost:4000/2021/07/16/from-ensemble-methods-to-model-averaging-in-deep-learning.html" />
 <meta property="og:site_name" content="Hawren’s blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-07-15T00:00:00-07:00" />
+<meta property="article:published_time" content="2021-07-16T00:00:00-07:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="From Ensemble Methods to Model Averaging in Deep Learning" />
 <script type="application/ld+json">
-{"datePublished":"2021-07-15T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-15T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning.","@context":"https://schema.org"}</script>
+{"datePublished":"2021-07-16T00:00:00-07:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/07/16/from-ensemble-methods-to-model-averaging-in-deep-learning.html"},"url":"http://localhost:4000/2021/07/16/from-ensemble-methods-to-model-averaging-in-deep-learning.html","author":{"@type":"Person","name":"Hawren Fang"},"headline":"From Ensemble Methods to Model Averaging in Deep Learning","dateModified":"2021-07-16T00:00:00-07:00","description":"In machine learning, ensemble methods create multiple models \\(M_1,M_2,\\dots,M_n\\) and fuse the results from them to achieve the test accuracy better than any of \\(M_1,M_2,\\dots,M_n\\). In a number of machine learning competitions, the winning solutions involved ensemble learning.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Hawren's blog" />
 
@@ -46,8 +46,8 @@
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">From Ensemble Methods to Model Averaging in Deep Learning</h1>
-    <p class="post-meta"><time class="dt-published" datetime="2021-07-15T00:00:00-07:00" itemprop="datePublished">
-        Jul 15, 2021
+    <p class="post-meta"><time class="dt-published" datetime="2021-07-16T00:00:00-07:00" itemprop="datePublished">
+        Jul 16, 2021
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             <span class="p-author h-card" itemprop="name">Hawren Fang</span></span></p>
@@ -69,13 +69,13 @@ which fused 5 strong computer vision models to win
 the first place of object classification and object localization
 in the 2016 ImageNet Large Scale Visual Recognition Challenge (ILSVRC).</p>
 
-<p>In deep learning, neural networks can be relatively expensive,
+<p>In deep learning, neural networks can be computationally expensive,
 in both training and inference.
 It restricts the applicability of ensemble methods
 in the productization of deep learning techniques.</p>
 
 <p>In this blog post, we review the ensemble methods used in deep learning, and
-discuss the model averaging methods implicitly supported or inspired by ensemble learning.
+discuss the model averaging methods inspired by or implicitly supported by ensemble learning.
 These model averaging methods improve the predictive performance 
 at little or limited extra computational cost.</p>
 
@@ -120,12 +120,12 @@ by fusing the results of 7 GoogLeNet models in this way,
 the top-5 error rate was 6.67%,
 as compared to 7.89% by a single GoogLeNet model <a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html">(Szegedy et al., 2015)</a>.</p>
 
-<p>In image classification, a common trick to improve accuracy is
-averaging the prediction results of multiple crops of the input image
-by a single network.
+<p>In image classification, a common trick to improve predictive accuracy is
+feeding multiple crops of an input image to a single network
+for multiple predictions, and averaging them.
 It is different from the ensemble of models discussed here.
-Both can be applied jointly, and the reasoning in the following discussion
-remains valid.</p>
+Both multiple crops and an ensemble of multiple models can be applied jointly,
+and the following statistical support remains valid.</p>
 
 <h3 id="statistical-support">Statistical support</h3>
 
@@ -147,7 +147,7 @@ Var(G_n) &amp; = &amp; \frac{1}{n^2} Var(F_1+F_2+\cdots+F_n) \\
        &amp; = &amp; \frac{1}{n} Var(F),
 \end{eqnarray}\]
 
-<p>where we have denoted \(Var(F)=Var(F_1)=\cdots=Var(F_2)\) since they are all the same.
+<p>where we have denoted \(Var(F)=Var(F_1)=\cdots=Var(F_n)\) since they are all the same.
 Therefore, the prediction accuracy is improved by variance reduction,
 which can be seen from \(Var(G_n)=\frac{1}{n} Var(F)\).
 By the strong law of large numbers, we obtain
@@ -181,7 +181,7 @@ the cost is \(n\) times, in both training and inference.</p>
 
 <p>Boosting refers to a generic sequential ensemble algorithm to improve the accuracy of
 <em>any</em> given learning method, called the <em>base learner</em>.
-A specific example may help the clarity of the discussion.
+A specific example helps the clarity of the discussion.
 Here we consider AdaBoost <a href="https://www.sciencedirect.com/science/article/pii/S002200009791504X">(Freund &amp; Schapire, 1997)</a>,
 short for adaptive boosting, for binary classification.
 A Python-style pseudo-code of AdaBoost is provided as follows.</p>
@@ -239,8 +239,8 @@ The readers are referred to <a href="https://en.wikipedia.org/wiki/Boosting_(mac
 
 <h3 id="properties">Properties</h3>
 
-<p>AdaBoost for binary classification has nice theoretical properties to support that
-it is indeed a boosting algorithm.</p>
+<p>AdaBoost for binary classification has nice theoretical properties,
+supporting that it is indeed a boosting algorithm.</p>
 
 <ul>
   <li>The training error of the ensemble decreases exponentially fast to zero
@@ -257,7 +257,7 @@ data.</li>
 learner, such as decision trees, or even just decision stumps (i.e., decision
 trees with a single split).
 In theory, AdaBoost is not limited to weak learners;
-it is applicable with neural networks <a href="https://papers.nips.cc/paper/1997/hash/9cb67ffb59554ab1dabb65bcb370ddd9-Abstract.html">(Schwenk &amp; Bengio, 1997)</a>.</p>
+it is applicable to neural networks <a href="https://papers.nips.cc/paper/1997/hash/9cb67ffb59554ab1dabb65bcb370ddd9-Abstract.html">(Schwenk &amp; Bengio, 1997)</a>.</p>
 
 <p>The boosting methods share some common properties, such as
 every model is trained to improve the ensemble of the former models, and
@@ -267,18 +267,18 @@ they can work with virtually any base learner, at least in theory.</p>
 
 <p>Here is an example to combine the merits of boosting and neural networks.
 <a href="http://www.bmva.org/bmvc/2016/papers/paper024/index.html">Moghimi et al. (2016)</a> applied GD-MCBoost <a href="https://papers.nips.cc/paper/2011/hash/2ac2406e835bd49c70469acae337d292-Abstract.html">(Saberian &amp; Vasconcelos, 2011)</a>
-with convolutional neural networks, called BoostCNN, for multiclass classification.
-They reported the improved accuracy by BoostCNN on multiple datasets.
-The following picture shows the result on <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>.</p>
+with convolutional neural networks for multiclass classification.
+Their method, called BoostCNN, improved the predictive accuracy on multiple datasets
+in the experiments. The following picture shows the result on <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>.</p>
 
 <p><img src="/assets/images/mcboost_cnn_cfar10.png" alt="BoostCNN CIFAR-10 result" /></p>
 
-<p>Figure 2. CIFAR-10 classification error rate with single CNN, Bagging (i.e. simple averaging), and BoostCNN.
+<p>Figure 2. CIFAR-10 classification error rate with single CNN, Bagging (simple averaging), and BoostCNN.
 Image source: <a href="http://www.bmva.org/bmvc/2016/papers/paper024/index.html">Moghimi et al. (2016)</a></p>
 
 <p><a href="http://www.bmva.org/bmvc/2016/papers/paper024/index.html">Moghimi et al. (2016)</a> trained 9
 convolutional neural networks for each ensemble:
-Bagging (i.e. simple averaging), BoostCNNs with and without reset.
+Bagging (simple averaging), and BoostCNNs with and without reset.
 A practical trick for BoostCNN is hinted in Figure 2.
 The recommendation is to initialize each base learner with the last trained base
 learner (without reset). The result is better than that with randomized
@@ -286,26 +286,23 @@ weight initialization for all the base learners (with reset).</p>
 
 <h3 id="comparison">Comparison</h3>
 
-<p>A comparison between simple averaging and AdaBoost is as follows.</p>
+<p>A comparison between simple averaging and boosting is as follows.</p>
 
 <ul>
   <li>From the machine learning perspective,
-simple averaging or voting reduces variance, whereas AdaBoost reduces the bias.</li>
-  <li>Each model trained by AdaBoost has the purpose to improve the ensemble of
-the former models. In this respect, AdaBoost may require fewer models than
+simple averaging or voting reduces variance, whereas boosting reduces the bias.</li>
+  <li>Each model trained by boosting has the purpose to improve the ensemble of
+the former models. In this respect, boosting may require fewer models than
 simple averaging or voting for the comparable accuracy improvement;
 see e.g. the example in Figure 2.
 Hence the computational cost may be reduced.</li>
-  <li>The models in AdaBoost are trained sequentially, whereas in the ensemble
+  <li>Boosting techniques train models sequentially, whereas in the ensemble
 by simple averaging or voting, the models can be independently trained,
 good for parallel computing.</li>
-  <li>In inference, the models can be applied separately, and
+  <li>At test time, the models can be applied separately, and
 the results are fused to form the final prediction.
-This property remains valid in AdaBoost.</li>
+This property holds in both simple averaging and boosting.</li>
 </ul>
-
-<p>The above comments are applicable to other boosting methods, not limited to
-AdaBoost.</p>
 
 <h3 id="remark-1">Remark</h3>
 
@@ -341,10 +338,10 @@ to escape from unsatisfactory local minima.</p>
 
 <h3 id="cyclic-learning-rate-schedule">Cyclic learning rate schedule</h3>
 
-<p>A key point in snapshot ensembling (SSE) is the cyclic learning rate schedule,
-where the sudden jumps of learning rate allow escaping from local minima,
-in each cycle the decreasing learning rate helps the convergence to,
-hopefully, another better local minimum.
+<p>A key point for success in snapshot ensembling (SSE) is the cyclic learning rate schedule,
+where the sudden jumps of learning rate allow escaping from local minima.
+In each cycle, the decreasing learning rate helps the convergence to another,
+hopefully better, local minimum.
 We take a snapshot of the model weights before raising the learning rate.
 During the inference phase, we average the predictions of the model snapshots
 to form the final prediction for each test case.</p>
@@ -378,10 +375,10 @@ fixed cycle length \(C\) for all cycles \(t=0,\dots,n-1\).</p>
 the result of CIFAR-10 training loss of 100-layer DenseNet
 <a href="https://openaccess.thecvf.com/content_cvpr_2017/html/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.html">(Huang et al., 2017b)</a>,
 using a cyclic learning rate schedule by cosine annealing,
-with \(\alpha_{max}^t=0.1\), \(\alpha_{min}^t=0\), and 50 epochs,
+with \(\alpha_{max}^t=0.1\), \(\alpha_{min}^t=0\), and 50 epochs in each cycle,
 for all \(t=0,\dots,n-1\) (\(n=6\) cycles).
 The result of a standard learning rate schedule is also shown
-in the picture for comparison.</p>
+for comparison.</p>
 
 <p><img src="/assets/images/cyclic_lr_loss.png" alt="Training loss vs. learning rate schedules" /></p>
 
@@ -397,7 +394,7 @@ The final prediction for each test case is from averaging the predictions of
 the models in the ensemble.
 The following picture displays the CIFAR-10 and CIFAR-100 results,
 with various numbers of models in the ensemble, and
-two different start learning rates \(\alpha_0=0.1\) and \(\alpha_0=0.2\).
+two different starter learning rates \(\alpha_0=0.1\) and \(\alpha_0=0.2\).
 The test accuracy improvement by snapshot ensembling is clear.</p>
 
 <p><img src="/assets/images/snapshot_ensembles_cifar_result.png" alt="CIFAR result of snapshot ensembles" /></p>
@@ -430,21 +427,20 @@ for the low training loss along the path.
 Image source: <a href="https://proceedings.neurips.cc/paper/2018/hash/be3087e74e9100d4bc4c6268cdbe8456-Abstract.html">Garipov et al. (2018)</a></p>
 
 <p>To visualize the training loss as a function of model weights,
-we perform an affine transformation from
-the high-dimensional weight space to a 2D plane,
-which can be uniquely determined by 3 linearly independent models,
+we consider a 2D plane in the high-dimensional weight space. 
+A 2D plane can be uniquely determined by 3 linearly independent models,
 as 3 points in the weight space.
 That’s how the left picture of Figure 6 is obtained,
 with 3 independently trained models.</p>
 
-<p>Consider the right picture in Figure 6.
-We use a polygonal chain with one bend to connect two models.
+<p>Consider the right picture in Figure 6,
+where a polygonal chain with one bend connects two models.
 We need to determine the bend point, which
-uniquely decides the polygonal chain and therefore the 2D plane for visualization.
+uniquely defines the polygonal chain and therefore the 2D plane for visualization.
 The bend point is chosen to minimize the integral of the training loss
 along the polygonal chain.
 Likewise, as shown in the middle picture in Figure 6,
-we can obtain a quadratic Bezier curve connecting the two minima
+we can obtain a <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">quadratic Bezier curve</a> connecting the two minima,
 on which curve the training loss stays low.</p>
 
 <p>Now the finding, called <em>mode connectivity</em>, is clear.
@@ -542,12 +538,12 @@ Image source: <a href="https://jmlr.org/papers/v15/srivastava14a.html">Srivastav
 <p>For a network with \(N\) internal nodes,
 there are \(2^N\) such thinned networks by dropout,
 including those with broken layers.
-In every mini-batch iteration, we train one of the thinned network.
+In every mini-batch iteration, we train one of the thinned networks.
 From this point of view, we are implicitly
 training exponentially many networks with extensively shared weights.</p>
 
 <p>After the training, we form a model with weights
-as the weighted average the weights of the \(2^N\) thinned networks,
+as the (weighted) average the weights of the \(2^N\) thinned networks,
 weighted according to the frequency in the mini-batch training iterations.
 Equivalently, we multiply the weights by \(1-p\), with \(p\) the dropout rate,
 to get the model used in test time <em>without</em> dropout.
@@ -584,14 +580,11 @@ we scale the weights by \(1/(1-p)\) during the training, and
 the weights are intact in the inference phase.
 Here \(p\) is the dropout rate.</p>
 
-<p>While the inverted dropout delivers the equivalent training behaviors as the
+<p>While the inverted dropout delivers the equivalent training effect as the
 dropout, it provides extra practical convenience, such as:</p>
 
 <ul>
-  <li>For the weight initialization schemes involving variance control, such as
-the Xavier initialization <a href="http://proceedings.mlr.press/v9/glorot10a.html">(Xavier &amp; Bengio, 2010)</a>,
-the statistical support remains valid with the inverted dropout.
-Therefore, modification of the weight initialization scheme is not required.</li>
+  <li>The saved model can be used directly at test time, no need to scale the weights.</li>
   <li>With the inverted dropout, the dropout rate can be changed dynamically
 from one iteration to another during the training.</li>
 </ul>
@@ -610,6 +603,8 @@ randomly skips <em>layers</em> instead of dropping nodes or connections.</li>
   <li>Swapout <a href="https://proceedings.neurips.cc/paper/2016/hash/c51ce410c124a10e0db5e4b97fc2af39-Abstract.html">(Singh et al., 2016)</a> is a more general framework of random dropping,
 in which dropout and the stochastic depth technique are two particular instances.</li>
 </ul>
+
+<h3 id="remark-3">Remark</h3>
 
 <blockquote>
   <p>The implicit ensembles, with a random dropping scheme during the training,
@@ -655,7 +650,7 @@ training loss:</p>
   \end{cases},\]
 
 <p>where \(w_{\text{SWA}}\) and \(w_{\text{SGD}}\) are model weights from
-SWA training and SGD training, respectively.
+SWA training and SGD training, respectively;
 \(d\) is a random direction, drawn from a uniform distribution on the unit sphere,
 and \(t\) is the distance from \(w_{\text{SWA}}\) or \(w_{\text{SGD}}\).</p>
 
@@ -677,7 +672,7 @@ Image source: <a href="http://auai.org/uai2018/proceedings/papers/313.pdf">Izmai
 minimum than SGD, while SGD results in a lower local minimum than SWA.
 As shown in the left picture, the wider local minimum by SWA achieves
 lower test error, as compared to SGD. 
-It supports that SWA helps find wider local minima,
+It supports the claim that SWA helps find wider local minima,
 which may improve the generalization and that eventually translates to
 better test performance.</p>
 
@@ -696,7 +691,7 @@ w_{\text{SWA}} \leftarrow \frac{w_{\text{SWA}}\cdot n_{\text{model}}+w}{n_{\text
 <p>where \(n_{\text{model}}\) is the number of models averaged for \(w_{\text{SWA}}\)
 before the update.</p>
 
-<h3 id="remark-3">Remark</h3>
+<h3 id="remark-4">Remark</h3>
 
 <blockquote>
   <p>Stochastic weight ensembling (SWA) trains one network with a cyclic
@@ -739,7 +734,7 @@ An illustration with \(k=5\) is given in the following picture.</p>
 <p>Figure 11. Illustration of Lookahead Optimization.
 Image source: <a href="https://michaelrzhang.github.io/assets/lookahead_slides.pdf">Zhang’s talk</a></p>
 
-<p>In Figure 11, the iterates are in sequence:</p>
+<p>In Figure 11, the iterates are in the sequence:</p>
 
 <p>\[
 \underline{\theta_{1,0}},\theta_{1,1},\dots,\theta_{1,5},
@@ -852,7 +847,7 @@ It perhaps implies the value of more frequent model averaging.</li>
 With a handful of mini-batch iterations, such as \(k=5\) or \(k=10\),
 the model quality change may not be that significant.
 Hence averaging the two models evenly, i.e. \(\alpha=0.5\), may work
-better than the aggressive step length \(\alpha=0.8\) of Lookahead.</li>
+better than the aggressive step length \(\alpha=0.8\).</li>
   <li>In all settings, Lookahead outperforms the baseline SGD (i.e. turning off Lookahead).</li>
 </ul>
 
@@ -860,7 +855,7 @@ better than the aggressive step length \(\alpha=0.8\) of Lookahead.</li>
 The result on CIFAR-10 image classification in shown in Figure 13 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>,
 where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
-but help the result less sensitive to the change of learning rate.</p>
+but also helps the result less sensitive to the change of learning rate.</p>
 
 <p><img src="/assets/images/lookahead_vs_sgd_cifar10.png" alt="Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10" /></p>
 
@@ -874,16 +869,16 @@ frequent model averaging.</p>
 
 <p>Figure 14 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a> gives the plot of test
 accuracy vs. mini-batch iterations on epoch 65,
-where fast weights are marked in blue solid lines (inner iterations)
-and slow weights are marked in the green dashed line (outer iterations).</p>
+where fast weights (inner iterations) are marked in blue solid lines
+and slow weights (outer iterations) are marked in the green dashed line.</p>
 
 <p><img src="/assets/images/slow_vs_fast_weights_test_error.png" alt="Test accuracy, slow weights vs. fast weights of Lookahead" /></p>
 
 <p>Figure 14. Test accuracy, slow weights vs. fast weights of Lookahead.
 Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
 
-<p>Mini-batch iterations, which update fast weights, are expectedly reducing
-the training loss, as the purpose of optimization in the training.
+<p>Mini-batch iterations, which update fast weights, are expected to reduce
+the training loss, as it is the purpose of optimization in neural network training.
 On the other hand, as shown in Figure 14, when it is close to the convergence,
 updating the fast weights may more likely hurt the test accuracy,
 while slow weights help regain the predictive performance.</p>
@@ -907,7 +902,7 @@ which may lead to wider local minima and better generalization <a href="http://a
 
 <p>These merits are observed in the experiments <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>.</p>
 
-<h3 id="remark-4">Remark</h3>
+<h3 id="remark-5">Remark</h3>
 
 <blockquote>
   <p>Lookahead wraps around an optimizer, such as SGD or Adam, for neural network training.
@@ -1014,68 +1009,64 @@ NeurIPS, 2018.</p>
 <a href="https://jmlr.org/papers/v15/srivastava14a.html">“Dropout: A Simple Way to Prevent Neural Networks from Overfitting,”</a>
 Journal of Machine Learning Research, Vol. 15, No. 56, pp. 1929-1958, 2014.</p>
 
-<p>[16] X. Glorot and Y. Bengio,
-<a href="http://proceedings.mlr.press/v9/glorot10a.html">“Understanding the difficulty of training deep feedforward neural networks,”</a>
-AISTATS, Vol. 9, pp. 249-256, 2010.</p>
-
-<p>[17] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
+<p>[16] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
 <a href="https://openaccess.thecvf.com/content_cvpr_2015/html/Tompson_Efficient_Object_Localization_2015_CVPR_paper.html">“Efficient object localization using convolutional networks,”</a>
 CVPR, pp. 648-656, 2015.</p>
 
-<p>[18] G. Ghiasi, T.-Y. Lin, Q. V. Le
+<p>[17] G. Ghiasi, T.-Y. Lin, Q. V. Le
 <a href="https://papers.nips.cc/paper/2018/hash/7edcfb2d8f6a659ef4cd1e6c9b6d7079-Abstract.html">“DropBlock: A regularization method for convolutional networks,”</a>
 NeurIPS, 2018.</p>
 
-<p>[19] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
+<p>[18] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
 <a href="http://proceedings.mlr.press/v28/wan13.html">“Regularization of neural networks using DropConnect,”</a>
 ICML, Vol. 28, No. 3, pp. 1058-1066, 2013.</p>
 
-<p>[20] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
+<p>[19] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
 <a href="https://link.springer.com/chapter/10.1007/978-3-319-46493-0_39">“Deep networks with stochastic depth,”</a>
 ECCV, pp. 646-661, 2016.</p>
 
-<p>[21] S. Singh, D. Hoiem, and D. Forsyth,
+<p>[20] S. Singh, D. Hoiem, and D. Forsyth,
 <a href="https://proceedings.neurips.cc/paper/2016/hash/c51ce410c124a10e0db5e4b97fc2af39-Abstract.html">Swapout: Learning an ensemble of deep architectures,”</a>
 NeurIPS, 2016.</p>
 
-<p>[22] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
+<p>[21] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
 <a href="http://auai.org/uai2018/proceedings/papers/313.pdf">“Averaging weights leads to wider optima and better generalization,”</a>
 UAI, 2018.</p>
 
-<p>[23] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
+<p>[22] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
 <a href="https://papers.nips.cc/paper/2018/hash/a41b3bb3e6b050b6c9067c67f663b915-Abstract.html">“Visualizing the loss landscape of neural nets,”</a>
 NeurIPS, 2018.</p>
 
-<p>[24] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
+<p>[23] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">“Lookahead Optimizer: \(k\) steps forward, 1 step back,”</a>
 NeurIPS, 2019.</p>
 
-<p>[25] J. Martens,
+<p>[24] J. Martens,
 <a href="https://jmlr.org/papers/v21/17-678.html">“New Insights and Perspectives on the Natural Gradient Method,”</a>
 Journal of Machine Learning Research, Vol. 21, No. 146, pp. 1-76, 2020.</p>
 
-<p>[26] D. P. Kingma and J. Ba,
+<p>[25] D. P. Kingma and J. Ba,
 <a href="https://arxiv.org/abs/1412.6980">“Adam: A Method for Stochastic Optimization,”</a>
 ICLR, 2015.</p>
 
-<p>[27] D. G. Anderson,
+<p>[26] D. G. Anderson,
 <a href="https://dl.acm.org/doi/abs/10.1145/321296.321305">“Iterative procedures for nonlinear integral equations,”</a>
 Journal of the ACM, Vol. 12, No. 4, pp. 547-560, 1965.</p>
 
-<p>[28] H.-r. Fang and Y. Saad,
+<p>[27] H.-r. Fang and Y. Saad,
 <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/nla.617">“Two classes of multisecant methods for nonlinear acceleration,”</a>
 Numerical Linear Algebra and Its Applications, Vol. 16, No. 3, pp. 197-221, 2009.</p>
 
-<p>[29] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
+<p>[28] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
 <a href="https://openreview.net/forum?id=rkgz2aEKDr">“On the variance of the adaptive learning rate and beyond,”</a>
 ICLR, 2020.</p>
 
-<p>[30] L. Wright:
+<p>[29] L. Wright:
 <a href="https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d">“New deep learning optimizer, Ranger: synergistic combination of RAdam + LookAhead for the best of both,”</a>
 Medium blog post, 2019.</p>
 
 
-  </div><a class="u-url" href="/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html" hidden></a>
+  </div><a class="u-url" href="/2021/07/16/from-ensemble-methods-to-model-averaging-in-deep-learning.html" hidden></a>
 </article>
 
       </div>
