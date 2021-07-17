@@ -65,7 +65,7 @@ the winning solutions involved ensemble learning.</p>
 is an ensemble of 3 solutions to deliver
 excellent collaborative filtering results.
 Another example is <a href="https://docplayer.net/89246778-Good-practices-for-deep-feature-fusion.html">Trimps-Soushen</a>,
-which fused 5 strong computer vision models to win
+which fused 5 strong heterogeneous computer vision models to win
 the first place of object classification and object localization
 in the 2016 ImageNet Large Scale Visual Recognition Challenge (ILSVRC).</p>
 
@@ -160,7 +160,7 @@ despite the random factors in the training process.</p>
 <p>A few points are worth noting.</p>
 
 <ul>
-  <li>Simple averaging is applicable to classification problems,
+  <li>Simple averaging is also applicable to classification problems,
 where each \(F_i\) is a probability distribution, an array of predicted
 class probabilities, for \(i=1,\dots,n\).</li>
   <li>In a similar vein, the asymptotic certainty can be derived for
@@ -562,14 +562,32 @@ a dropout network typically takes 2-3 times longer to train
 than its counterpart without dropout.
 That’s the price to pay for the generalization.</p>
 
-<p>The following picture gives an example of improved test accuracy by dropout
-in the classification experiments by <a href="https://jmlr.org/papers/v15/srivastava14a.html">Srivastava et al. (2014)</a>.</p>
+<p>Consider network-in-network (NIN), a convolutional network
+for image classification <a href="https://arxiv.org/abs/1312.4400">(Lin et al., 2014)</a>.
+NIN consists of multiple blocks of convolutional layers.
+Each block, called a <em>mlpconv</em> layer, has one normal convolutional layer,
+followed by two 1x1 convolutional layers for cascaded cross-channel
+parametric pooling.
+The following picture exhibits the architecture of NIN with 3 mlpconv layers.</p>
 
-<p><img src="/assets/images/test_error_dropout.png" alt="Test error with and without dropout" /></p>
+<p><img src="/assets/images/nin_structure.png" alt="NIN architecture" /></p>
 
-<p>Figure 9. Test error with various network architectures (2 to 4 hidden
-layers), with and without dropout.
-Image source: <a href="https://jmlr.org/papers/v15/srivastava14a.html">Srivastava et al. (2014)</a></p>
+<p>Figure 9. The architecture of network-in-network.
+Image source: <a href="https://arxiv.org/abs/1312.4400">Lin et al. (2014)</a></p>
+
+<p>In an experiment by <a href="https://arxiv.org/abs/1312.4400">Lin et al. (2014)</a>,
+NIN was tested on CIFAR-10 in two settings.
+One is without dropout, and the other is with dropout applied
+between each pair of adjacent mlpconv layers.
+The following picture shows the result.
+It is clear that the noise by dropout increased the training error,
+while the regularization effect by dropout decreased the test error.</p>
+
+<p><img src="/assets/images/nin_dropout_train_vs_test.png" alt="NIN training vs. test error with and without dropout" /></p>
+
+<p>Figure 10. CIFAR-10 training error vs. test error of network-in-network (NIN),
+with and without dropout.
+Image source: <a href="https://arxiv.org/abs/1312.4400">Lin et al. (2014)</a></p>
 
 <h3 id="inverted-dropout">Inverted dropout</h3>
 
@@ -614,6 +632,21 @@ Therefore, the concern of inference cost is addressed to a certain extent.
 On the other hand, the random dropping creates noise, and that may result in
 the longer training for convergence.</p>
 </blockquote>
+
+<h3 id="asymptotic-approximation-to-the-ensemble">Asymptotic approximation to the ensemble</h3>
+
+<p>With a network trained with dropout applied,
+we can use the network as the averaged model for inference.
+This is the common practice, as an inexpensive <em>approximation</em>
+to the ensemble of the trained networks with extensively shared weights.</p>
+
+<p>Alternatively, given a test case, we can retain dropout, and
+apply the network \(n\) times for \(n\) predictions.
+The averaged result is the final prediction.
+In this way we can approximate the ensemble asymptotically
+at higher inference cost.
+That is, the prediction converges to the prediction by
+the ensemble of many networks as \(n\rightarrow \infty\).</p>
 
 <h2 id="stochastic-weight-averaging">Stochastic Weight Averaging</h2>
 
@@ -660,7 +693,7 @@ as shown in the following pictures.</p>
 
 <p><img src="/assets/images/swa_vs_sgd_1d_loss_landscape.png" alt="Loss sensitivity: SWA vs. SGD" /></p>
 
-<p>Figure 10. Plots of test error (<strong>left</strong>) and
+<p>Figure 11. Plots of test error (<strong>left</strong>) and
 \(L_2\)-regularized cross-entropy training loss (<strong>right</strong>),
 as functions of distance \(t\).
 Each line (10 lines in each setting) corresponds to
@@ -668,7 +701,7 @@ a random direction \(d\) as a unit vector.
 The testbed was ResNet-164 on CIFAR-10.
 Image source: <a href="http://auai.org/uai2018/proceedings/papers/313.pdf">Izmailov et al. (2018)</a></p>
 
-<p>In Figure 10, from the right picture, we see that SWA leads to a wider local
+<p>In Figure 11, from the right picture, we see that SWA leads to a wider local
 minimum than SGD, while SGD results in a lower local minimum than SWA.
 As shown in the left picture, the wider local minimum by SWA achieves
 lower test error, as compared to SGD. 
@@ -731,10 +764,10 @@ An illustration with \(k=5\) is given in the following picture.</p>
 
 <p><img src="/assets/images/lookahead_optimizer_illustration.png" alt="Illustration of Lookahead Optimization" /></p>
 
-<p>Figure 11. Illustration of Lookahead Optimization.
+<p>Figure 12. Illustration of Lookahead Optimization.
 Image source: <a href="https://michaelrzhang.github.io/assets/lookahead_slides.pdf">Zhang’s talk</a></p>
 
-<p>In Figure 11, the iterates are in the sequence:</p>
+<p>In Figure 12, the iterates are in the sequence:</p>
 
 <p>\[
 \underline{\theta_{1,0}},\theta_{1,1},\dots,\theta_{1,5},
@@ -759,7 +792,7 @@ They are called <em>slow weights</em>, whereas the others are called <em>fast we
 <p>where \(t\) is the index of slow weights,
 \(k\) is the synchronization period, and
 \(\alpha\) is the step length.
-In the illustration in Figure 11, \(k=5\) and \(\alpha=0.5\).</p>
+In the illustration in Figure 12, \(k=5\) and \(\alpha=0.5\).</p>
 
 <p>Note that slow weights can be written as an exponential moving average (EMA) of
 the fast weights at the end of each inner-loop.</p>
@@ -826,19 +859,19 @@ be restricted within 1 for positive weighting; hence \(\alpha&lt;1\).</li>
 
 <h3 id="result-2">Result</h3>
 
-<p>In Figure 12 is the result of experiments on CIFAR-100 image classification
+<p>In Figure 13 is the result of experiments on CIFAR-100 image classification
 with synchronization period \(k=5,10\) and step length \(\alpha=0.5,0.8\)
 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>.
 Note that \(k\) and \(\alpha\) are the only two hyper-parameters of Lookahead.</p>
 
 <p><img src="/assets/images/lookahead_hyperparameters_cifar100.png" alt="Effects of hyper-parameters of Lookahead, on CIFAR-100" /></p>
 
-<p>Figure 12. Effects of hyper-parameters of Lookahead, in the experiments on CIFAR-100.
+<p>Figure 13. Effects of hyper-parameters of Lookahead, in the experiments on CIFAR-100.
 <strong>Left:</strong> training loss vs. number of epochs.
 <strong>Right:</strong> Validation accuracy table (mean ± stdev).
 Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
 
-<p>We can see from Figure 12 that, in the experiments on CIFAR-100 image classification:</p>
+<p>We can see from Figure 13 that, in the experiments on CIFAR-100 image classification:</p>
 <ul>
   <li>The synchronization period \(k=5\) works better than \(k=10\), in terms of
 not only better accuracy and also lower variation of accuracy in multiple repeats.
@@ -852,14 +885,14 @@ better than the aggressive step length \(\alpha=0.8\).</li>
 </ul>
 
 <p>Another evaluation is the sensitivity to the learning rate of the base optimizer.
-The result on CIFAR-10 image classification in shown in Figure 13 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>,
+The result on CIFAR-10 image classification in shown in Figure 14 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a>,
 where the shadows reflect the variations in multiple repeats.
 We see that Lookahead not only stabilizes the training,
 but also helps the result less sensitive to the change of learning rate.</p>
 
 <p><img src="/assets/images/lookahead_vs_sgd_cifar10.png" alt="Sensitivity of learning rate, Lookahead vs SGD, on CIFAR-10" /></p>
 
-<p>Figure 13. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
+<p>Figure 14. Sensitivity of learning rate, Lookahead vs. the baseline SGD, on
 CIFAR-10 image classification. Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
 
 <p>Consider the observation that averaging model weights
@@ -867,19 +900,19 @@ leads to wider minimum and better generalization <a href="http://auai.org/uai201
 It can be empirically verified in the context of Lookahead, which applies
 frequent model averaging.</p>
 
-<p>Figure 14 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a> gives the plot of test
+<p>Figure 15 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">(Zhang et al., 2019)</a> gives the plot of test
 accuracy vs. mini-batch iterations on epoch 65,
 where fast weights (inner iterations) are marked in blue solid lines
 and slow weights (outer iterations) are marked in the green dashed line.</p>
 
 <p><img src="/assets/images/slow_vs_fast_weights_test_error.png" alt="Test accuracy, slow weights vs. fast weights of Lookahead" /></p>
 
-<p>Figure 14. Test accuracy, slow weights vs. fast weights of Lookahead.
+<p>Figure 15. Test accuracy, slow weights vs. fast weights of Lookahead.
 Source: <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">Zhang et al. (2019)</a></p>
 
 <p>Mini-batch iterations, which update fast weights, are expected to reduce
 the training loss, as it is the purpose of optimization in neural network training.
-On the other hand, as shown in Figure 14, when it is close to the convergence,
+On the other hand, as shown in Figure 15, when it is close to the convergence,
 updating the fast weights may more likely hurt the test accuracy,
 while slow weights help regain the predictive performance.</p>
 
@@ -913,12 +946,12 @@ but also improve the generalization and predictive performance.</p>
 updated slow weights, as  an exponential moving average (EMA) of the fast weights
 at the end of each inner-loop.
 There is no extra inference cost with Lookahead, as it does not change the
-picture that only one model is used in test time.</p>
+picture that only one model is used at test time.</p>
 </blockquote>
 
 <h3 id="afternote">Afternote</h3>
 
-<p>Since Lookahead can wrap around virtually any optimizer for deep learning,
+<p>Since Lookahead can wrap around virtually any optimizer for neural network training,
 what if we pick the most effective optimizer off the shelf?
 Consider RAdam, short for <em>rectified Adam</em> <a href="https://openreview.net/forum?id=rkgz2aEKDr">(Liu et al., 2020)</a>,
 which is commonly regarded as a significant improvement over
@@ -928,7 +961,7 @@ the already successful Adam <a href="https://arxiv.org/abs/1412.6980">(Kingma &a
 by using un-adapted momentum (i.e. with momentum but without adaptive learning rate)
 at early iterations, during which the exponential moving average (EMA) of each squared
 gradient component is not that reliable due to insufficient gradient samples.
-After that, it also rectifies the adaptive learning rate to improve the reliability.</p>
+After that, it also <em>rectifies</em> the adaptive learning rate to improve the reliability.</p>
 
 <p>The combination of Lookahead and RAdam, called <em>Ranger</em> optimizer
 <a href="https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d">(Wright, 2019)</a>, is synergistic,
@@ -1009,59 +1042,63 @@ NeurIPS, 2018.</p>
 <a href="https://jmlr.org/papers/v15/srivastava14a.html">“Dropout: A Simple Way to Prevent Neural Networks from Overfitting,”</a>
 Journal of Machine Learning Research, Vol. 15, No. 56, pp. 1929-1958, 2014.</p>
 
-<p>[16] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
+<p>[16] M. Lin, Q. Chen, and S. Yan,
+<a href="https://arxiv.org/abs/1312.4400">“Network in network,”</a>
+ICLR, 2014.</p>
+
+<p>[17] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, and C. Bregler,
 <a href="https://openaccess.thecvf.com/content_cvpr_2015/html/Tompson_Efficient_Object_Localization_2015_CVPR_paper.html">“Efficient object localization using convolutional networks,”</a>
 CVPR, pp. 648-656, 2015.</p>
 
-<p>[17] G. Ghiasi, T.-Y. Lin, Q. V. Le
+<p>[18] G. Ghiasi, T.-Y. Lin, Q. V. Le
 <a href="https://papers.nips.cc/paper/2018/hash/7edcfb2d8f6a659ef4cd1e6c9b6d7079-Abstract.html">“DropBlock: A regularization method for convolutional networks,”</a>
 NeurIPS, 2018.</p>
 
-<p>[18] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
+<p>[19] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus,
 <a href="http://proceedings.mlr.press/v28/wan13.html">“Regularization of neural networks using DropConnect,”</a>
 ICML, Vol. 28, No. 3, pp. 1058-1066, 2013.</p>
 
-<p>[19] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
+<p>[20] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger,
 <a href="https://link.springer.com/chapter/10.1007/978-3-319-46493-0_39">“Deep networks with stochastic depth,”</a>
 ECCV, pp. 646-661, 2016.</p>
 
-<p>[20] S. Singh, D. Hoiem, and D. Forsyth,
+<p>[21] S. Singh, D. Hoiem, and D. Forsyth,
 <a href="https://proceedings.neurips.cc/paper/2016/hash/c51ce410c124a10e0db5e4b97fc2af39-Abstract.html">Swapout: Learning an ensemble of deep architectures,”</a>
 NeurIPS, 2016.</p>
 
-<p>[21] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
+<p>[22] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
 <a href="http://auai.org/uai2018/proceedings/papers/313.pdf">“Averaging weights leads to wider optima and better generalization,”</a>
 UAI, 2018.</p>
 
-<p>[22] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
+<p>[23] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
 <a href="https://papers.nips.cc/paper/2018/hash/a41b3bb3e6b050b6c9067c67f663b915-Abstract.html">“Visualizing the loss landscape of neural nets,”</a>
 NeurIPS, 2018.</p>
 
-<p>[23] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
+<p>[24] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
 <a href="https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html">“Lookahead Optimizer: \(k\) steps forward, 1 step back,”</a>
 NeurIPS, 2019.</p>
 
-<p>[24] J. Martens,
+<p>[25] J. Martens,
 <a href="https://jmlr.org/papers/v21/17-678.html">“New Insights and Perspectives on the Natural Gradient Method,”</a>
 Journal of Machine Learning Research, Vol. 21, No. 146, pp. 1-76, 2020.</p>
 
-<p>[25] D. P. Kingma and J. Ba,
+<p>[26] D. P. Kingma and J. Ba,
 <a href="https://arxiv.org/abs/1412.6980">“Adam: A Method for Stochastic Optimization,”</a>
 ICLR, 2015.</p>
 
-<p>[26] D. G. Anderson,
+<p>[27] D. G. Anderson,
 <a href="https://dl.acm.org/doi/abs/10.1145/321296.321305">“Iterative procedures for nonlinear integral equations,”</a>
 Journal of the ACM, Vol. 12, No. 4, pp. 547-560, 1965.</p>
 
-<p>[27] H.-r. Fang and Y. Saad,
+<p>[28] H.-r. Fang and Y. Saad,
 <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/nla.617">“Two classes of multisecant methods for nonlinear acceleration,”</a>
 Numerical Linear Algebra and Its Applications, Vol. 16, No. 3, pp. 197-221, 2009.</p>
 
-<p>[28] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
+<p>[29] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
 <a href="https://openreview.net/forum?id=rkgz2aEKDr">“On the variance of the adaptive learning rate and beyond,”</a>
 ICLR, 2020.</p>
 
-<p>[29] L. Wright:
+<p>[30] L. Wright,
 <a href="https://lessw.medium.com/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d">“New deep learning optimizer, Ranger: synergistic combination of RAdam + LookAhead for the best of both,”</a>
 Medium blog post, 2019.</p>
 
