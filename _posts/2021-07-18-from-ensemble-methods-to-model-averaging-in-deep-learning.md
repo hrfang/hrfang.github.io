@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From Ensemble Methods to Model Averaging in Deep Learning"
-date: "2021-07-16"
+date: "2021-07-18"
 author: "Hawren Fang"
 usemathjax: true
 comments: true
@@ -577,6 +577,8 @@ These methods also lead to implicit ensembles as single networks used for predic
   randomly skips *layers* instead of dropping nodes or connections.
 - Swapout [(Singh et al., 2016)][swapout_paper] is a more general framework of random dropping,
   in which dropout and the stochastic depth technique are two particular instances.
+- [Larsson et al (2017)][fractalnet_paper] proposed drop-path for
+  training their FractalNet, a multi-path network for image classification.
 
 
 ### Remark
@@ -600,9 +602,11 @@ Alternatively, given a test case, we can retain dropout, and
 apply the network \\(n\\) times for \\(n\\) predictions.
 The averaged result is the final prediction.
 In this way we can approximate the ensemble asymptotically
-at higher inference cost.
+at much higher inference cost.
 That is, the prediction converges to the prediction by
 the ensemble of many networks as \\(n\rightarrow \infty\\).
+This asymptotic approximation also applies to the other aforementioned
+random dropping training techniques.
 
 
 ## Stochastic Weight Averaging
@@ -929,7 +933,7 @@ After that, it also *rectifies* the adaptive learning rate to improve the reliab
 The combination of Lookahead and RAdam, called *Ranger* optimizer
 [(Wright, 2019)][ranger_blog_post], is synergistic,
 since we can take advantage of all nice properties from both methods.
-The ranger optimizer helped established 12 leader-board records
+The ranger optimizer helped establish 12 leader-board records
 on the FastAI global leader-boards.
 See [Wright, (2019)][ranger_blog_post] and the links therein for more
 information.
@@ -991,7 +995,7 @@ Wikipedia.
 
 [8] H. Schwenk and Y. Bengio,
 ["Training methods for adaptive boosting of neural networks,"][adaboost_nn_paper]
-NeurIPS 1997.
+NeurIPS, 1997.
 
 [adaboost_nn_paper]: https://papers.nips.cc/paper/1997/hash/9cb67ffb59554ab1dabb65bcb370ddd9-Abstract.html
 
@@ -1009,7 +1013,7 @@ NeurIPS, 2011.
 
 [11] G. Huang, Y. Li, G. Pleiss, Z. Liu, J. E. Hopcroft, and K. Q. Weinberger
 ["Snapshot ensembles: train 1, get \\(M\\) for free,"][snapshot_ensembles_paper]
-ICLR 2017.
+ICLR, 2017.
 
 [snapshot_ensembles_paper]: https://openreview.net/forum?id=BJYwwY9ll
 
@@ -1068,60 +1072,66 @@ ECCV, pp. 646-661, 2016.
 [stochastic_depth_paper]: https://link.springer.com/chapter/10.1007/978-3-319-46493-0_39
 
 [21] S. Singh, D. Hoiem, and D. Forsyth,
-[Swapout: Learning an ensemble of deep architectures,"][swapout_paper]
+["Swapout: learning an ensemble of deep architectures,"][swapout_paper]
 NeurIPS, 2016.
 
 [swapout_paper]: https://proceedings.neurips.cc/paper/2016/hash/c51ce410c124a10e0db5e4b97fc2af39-Abstract.html
 
-[22] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
+[22] G. Larsson, M. Maire, and G. Shakhnarovich,
+["FractalNet: ultra-Deep neural networks without residuals,"][fractalnet_paper]
+ICLR, 2017.
+
+[fractalnet_paper]: https://arxiv.org/abs/1605.07648
+
+[23] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson,
 ["Averaging weights leads to wider optima and better generalization,"][swa_paper]
 UAI, 2018.
 
 [swa_paper]: http://auai.org/uai2018/proceedings/papers/313.pdf
 
-[23] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
+[24] H. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein,
 ["Visualizing the loss landscape of neural nets,"][loss_landscape_paper]
 NeurIPS, 2018.
 
 [loss_landscape_paper]: https://papers.nips.cc/paper/2018/hash/a41b3bb3e6b050b6c9067c67f663b915-Abstract.html
 
-[24] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
+[25] M. Zhang, J. Lucas, J. Ba, and G. E. Hinton,
 ["Lookahead Optimizer: \\(k\\) steps forward, 1 step back,"][lookahead_paper]
 NeurIPS, 2019.
 
 [lookahead_paper]: https://papers.nips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html
 
-[25] J. Martens,
+[26] J. Martens,
 ["New Insights and Perspectives on the Natural Gradient Method,"][natural_gradient_insights_paper]
 Journal of Machine Learning Research, Vol. 21, No. 146, pp. 1-76, 2020.
 
 [natural_gradient_insights_paper]: https://jmlr.org/papers/v21/17-678.html
 
-[26] D. P. Kingma and J. Ba,
+[27] D. P. Kingma and J. Ba,
 ["Adam: A Method for Stochastic Optimization,"][adam_paper]
 ICLR, 2015.
 
 [adam_paper]: https://arxiv.org/abs/1412.6980
 
-[27] D. G. Anderson,
+[28] D. G. Anderson,
 ["Iterative procedures for nonlinear integral equations,"][anderson_mixing_paper]
 Journal of the ACM, Vol. 12, No. 4, pp. 547-560, 1965.
 
 [anderson_mixing_paper]: https://dl.acm.org/doi/abs/10.1145/321296.321305
 
-[28] H.-r. Fang and Y. Saad,
+[29] H.-r. Fang and Y. Saad,
 ["Two classes of multisecant methods for nonlinear acceleration,"][nonlinear_acceleration_paper]
 Numerical Linear Algebra and Its Applications, Vol. 16, No. 3, pp. 197-221, 2009.
  
 [nonlinear_acceleration_paper]: https://onlinelibrary.wiley.com/doi/abs/10.1002/nla.617
 
-[29] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
+[30] L. Liu, H. Jiang, P. He, W. Chen, X. Liu, J. Gao, and J. Han
 ["On the variance of the adaptive learning rate and beyond,"][radam_paper]
 ICLR, 2020.
 
 [radam_paper]: https://openreview.net/forum?id=rkgz2aEKDr
 
-[30] L. Wright,
+[31] L. Wright,
 ["New deep learning optimizer, Ranger: synergistic combination of RAdam + LookAhead for the best of both,"][ranger_blog_post]
 Medium blog post, 2019.
 
