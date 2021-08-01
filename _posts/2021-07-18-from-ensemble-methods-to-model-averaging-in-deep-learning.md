@@ -944,7 +944,7 @@ Cited as:
       title        = "From Ensemble Methods to Model Averaging in Deep Learning",
       author       = "Fang, Hawren",
       year         = 2021,
-      howpublished = "http://hrfang.github.io/2021/07/15/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
+      howpublished = "http://hrfang.github.io/2021/07/18/from-ensemble-methods-to-model-averaging-in-deep-learning.html"
 }
 ```
 
